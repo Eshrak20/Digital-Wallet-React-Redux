@@ -1,5 +1,6 @@
 import type { ProfileResponse } from "@/types/user.type";
 import { baseApi } from "./baseApi";
+import type { TransactionApiResponse } from "@/types/admin.type";
 
 export const userApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -8,9 +9,16 @@ export const userApi = baseApi.injectEndpoints({
         url: "/user/my-profile",
         method: "GET",
       }),
-      providesTags: ["User"], // caching support
+      providesTags: ["User"],
+    }),
+    getYourTrans: builder.query<TransactionApiResponse, void>({
+      query: () => ({
+        url: "/trans/your-transactions",
+        method: "GET",
+      }),
+      providesTags: ["User"],
     }),
   }),
 });
 
-export const { useMyProfileQuery } = userApi;
+export const { useMyProfileQuery,useGetYourTransQuery } = userApi;

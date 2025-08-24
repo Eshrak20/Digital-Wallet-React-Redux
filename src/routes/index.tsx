@@ -14,6 +14,7 @@ import { withAuth } from "@/utils/withAuth";
 import { createBrowserRouter, Navigate } from "react-router";
 import { adminSidebarItems } from "./adminSidebarItems";
 import { generateRoutes } from "@/utils/generateRoutes";
+import { userSidebarItems } from "./userSidebarItems";
 
 export const router = createBrowserRouter([
   {
@@ -56,10 +57,18 @@ export const router = createBrowserRouter([
   },
   {
     Component: withAuth(DashboardLayout, role.admin as TRole),
-    path: "/admin",
+    path: "/admin/dashboard",
     children: [
-      { index: true, element: <Navigate to="/admin/all-users" /> },
+      { index: true, element: <Navigate to="/admin/dashboard/all-users" /> },
       ...generateRoutes(adminSidebarItems),
+    ],
+  },
+  {
+    Component: withAuth(DashboardLayout, role.user as TRole),
+    path: "/user/dashboard",
+    children: [
+      { index: true, element: <Navigate to="/user/dashboard/your-trans" /> },
+      ...generateRoutes(userSidebarItems),
     ],
   },
 ]);
