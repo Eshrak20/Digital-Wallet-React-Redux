@@ -9,6 +9,8 @@ import {
   UserIcon,
   MenuIcon,
   LogOutIcon,
+  Wallet2Icon,
+  AlignStartVertical,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -36,6 +38,9 @@ import { useMyProfileQuery } from "@/redux/api/userApi";
 import { authApi, useLogoutUserMutation } from "@/redux/api/authApi";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useDispatch } from "react-redux";
+import { handleApiError } from "@/utils/handleApiError";
+import { toast } from "react-toastify";
+import { getDashboardPath } from "@/utils/getDashboardPath";
 
 const navigationLinks = [
   { href: "/", label: "Home", icon: HouseIcon },
@@ -48,17 +53,21 @@ const navigationLinks = [
 
 export default function Navbar() {
   const { data: profileData, isLoading } = useMyProfileQuery();
+  console.log(profileData);
   const [logout] = useLogoutUserMutation();
   const dispatch = useDispatch();
   const userData = profileData?.data?.data;
+
   const isAuthenticated = !!userData;
-  
+
   const handleLogout = async () => {
     try {
       await logout().unwrap();
-      dispatch(authApi.util.resetApiState())
+      dispatch(authApi.util.resetApiState());
+      toast.error("Logout successfully!");
     } catch (err) {
       console.error("Failed to logout:", err);
+      handleApiError(err);
     }
   };
 
@@ -91,7 +100,7 @@ export default function Navbar() {
                       to={link.href}
                       className="flex items-center gap-2 px-3 py-2 font-medium text-white hover:text-[#E2136E] transition-colors rounded-md hover:bg-gray-800/50"
                     >
-                      <Icon size={16} className="text-gray-400" />
+                      {Icon && <Icon size={16} className="text-gray-400" />}
                       {link.label}
                     </Link>
                   </NavigationMenuLink>
@@ -129,7 +138,9 @@ export default function Navbar() {
               <DropdownMenuTrigger className="outline-none">
                 <Avatar className="border border-gray-700 cursor-pointer hover:border-[#E2136E] transition-colors">
                   <AvatarImage
-                    src={userData.avatarUrl || "https://via.placeholder.com/40"}
+                    src={
+                      userData.profilePic || "https://via.placeholder.com/40"
+                    }
                     alt={userData.name}
                   />
                   <AvatarFallback className="bg-gray-800">
@@ -148,20 +159,32 @@ export default function Navbar() {
                   </span>
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator className="bg-gray-700" />
-                <DropdownMenuItem asChild className="cursor-pointer focus:bg-gray-800 focus:text-white">
-                  <Link to="/profile" className="flex items-center gap-2">
-                    <UserIcon size={16} />
-                    Profile
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild className="cursor-pointer focus:bg-gray-800 focus:text-white">
+                {userData && (
+                  <DropdownMenuItem
+                    asChild
+                    className="cursor-pointer focus:bg-gray-800 focus:text-white"
+                  >
+                    <Link
+                      to={getDashboardPath(userData.role)}
+                      className="flex items-center gap-2"
+                    >
+                      <AlignStartVertical size={16} />
+                      Dashboard
+                    </Link>
+                  </DropdownMenuItem>
+                )}
+
+                <DropdownMenuItem
+                  asChild
+                  className="cursor-pointer focus:bg-gray-800 focus:text-white"
+                >
                   <Link to="/settings" className="flex items-center gap-2">
-                    <UserIcon size={16} />
-                    Settings
+                    <Wallet2Icon size={16} />
+                    Wallet
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator className="bg-gray-700" />
-                <DropdownMenuItem 
+                <DropdownMenuItem
                   onClick={handleLogout}
                   className="cursor-pointer text-red-400 focus:bg-gray-800 focus:text-red-300"
                 >
@@ -198,14 +221,14 @@ export default function Navbar() {
                       to={link.href}
                       className="flex items-center gap-2 px-3 py-2 text-white hover:text-[#E2136E] transition-colors rounded-md hover:bg-gray-800/50"
                     >
-                      <Icon size={16} className="text-gray-400" />
+                      {Icon && <Icon size={16} className="text-gray-400" />}
                       {link.label}
                     </Link>
                   );
                 })}
-                
+
                 <div className="border-t border-gray-700 my-2"></div>
-                
+
                 {isLoading ? (
                   <div className="flex flex-col gap-2 p-2">
                     <Skeleton className="h-8 w-full rounded-md bg-gray-800" />
@@ -214,7 +237,10 @@ export default function Navbar() {
                 ) : !isAuthenticated ? (
                   <div className="flex flex-col gap-2">
                     <Link to="/login">
-                      <Button variant="outline" className="w-full text-black border-gray-700 hover:bg-gray-800">
+                      <Button
+                        variant="outline"
+                        className="w-full text-black border-gray-700 hover:bg-gray-800"
+                      >
                         Login
                       </Button>
                     </Link>

@@ -10,3 +10,4 @@ export interface ISignup {
   phone: string;
 }
 
+export type TRole = "ADMIN" | "AGENT" | "USER";

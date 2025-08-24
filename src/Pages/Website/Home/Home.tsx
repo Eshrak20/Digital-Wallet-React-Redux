@@ -2,7 +2,7 @@ import Navbar from "@/layout/Navbar";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import SkeletonCard from "@/Pages/MYComponent/Loading/SkeletonCard";
+import SkeletonCard from "@/Pages/MYComponent/SkeletonCard";
 const Home = () => {
   const [loading, setLoading] = useState(true);
 

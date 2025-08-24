@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -5,7 +6,8 @@ import { useCreateUserMutation } from "@/redux/api/authApi";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { handleApiError } from "@/utils/handleApiError";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -16,28 +18,43 @@ const Signup = () => {
     address: "",
     phone: "",
   });
+  type FormValues = {
+    name: string;
+    email: string;
+    password: string;
+    address: string;
+    phone: string;
+  };
 
   const [createUser, { isLoading }] = useCreateUserMutation();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    const key = e.target.name as keyof FormValues;
+    setForm({ ...form, [key]: e.target.value });
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const result = await createUser(form).unwrap();
-      console.log("API Response:", result);
-      toast.success("Account created successfully!");
-      setTimeout(() => {
-        navigate("/login");
-      }, 1500); // Redirect after 1.5s
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      await createUser(form).unwrap();
+      toast.success("Account created successfully! ✅");
+      navigate("/login");
     } catch (err: any) {
-      console.error("Signup error:", err);
-      toast.error(err?.data?.message || "Signup failed!");
+      handleApiError(err);
     }
   };
+
+  const inputs: {
+    name: keyof FormValues;
+    placeholder: string;
+    type: string;
+  }[] = [
+    { name: "name", placeholder: "Full Name", type: "text" },
+    { name: "email", placeholder: "Email Address", type: "email" },
+    { name: "password", placeholder: "Password", type: "password" },
+    { name: "address", placeholder: "Address", type: "text" },
+    { name: "phone", placeholder: "Phone Number", type: "text" },
+  ];
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-black">
@@ -49,48 +66,18 @@ const Signup = () => {
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
-            <Input
-              placeholder="Full Name"
-              name="name"
-              value={form.name}
-              onChange={handleChange}
-              required
-              className="bg-white text-black"
-            />
-            <Input
-              type="email"
-              placeholder="Email Address"
-              name="email"
-              value={form.email}
-              onChange={handleChange}
-              required
-              className="bg-white text-black"
-            />
-            <Input
-              type="password"
-              placeholder="Password"
-              name="password"
-              value={form.password}
-              onChange={handleChange}
-              required
-              className="bg-white text-black"
-            />
-            <Input
-              placeholder="Address"
-              name="address"
-              value={form.address}
-              onChange={handleChange}
-              required
-              className="bg-white text-black"
-            />
-            <Input
-              placeholder="Phone Number"
-              name="phone"
-              value={form.phone}
-              onChange={handleChange}
-              required
-              className="bg-white text-black"
-            />
+            {inputs.map((input) => (
+              <Input
+                key={input.name}
+                type={input.type}
+                placeholder={input.placeholder}
+                name={input.name}
+                value={form[input.name]}
+                onChange={handleChange}
+                required
+                className="bg-white text-black"
+              />
+            ))}
             <Button
               type="submit"
               className="w-full bg-[#E2136E] text-white hover:bg-white hover:text-[#E2136E] transition"
@@ -101,9 +88,9 @@ const Signup = () => {
           </form>
           <p className="text-center text-sm text-gray-400 mt-4">
             Already have an account?{" "}
-            <a href="/login" className="text-[#E2136E] underline">
+            <Link to="/login" className="text-[#E2136E] underline">
               Login
-            </a>
+            </Link>
           </p>
         </CardContent>
       </Card>

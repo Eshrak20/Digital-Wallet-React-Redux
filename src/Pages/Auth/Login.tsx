@@ -1,10 +1,12 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useLoginUserMutation } from "@/redux/api/authApi";
+import { handleApiError } from "@/utils/handleApiError";
 const Login = () => {
   const navigate = useNavigate();
   const [form, setForm] = useState({ email: "", password: "" });
@@ -25,12 +27,10 @@ const Login = () => {
       }
 
       toast.success("Logged in successfully!");
-      navigate("/"); // Redirect after login
+      navigate("/");
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
-      console.error("Login error:", err);
-      toast.error(err?.data?.message || "Login failed!");
+      handleApiError(err);
     }
   };
 
@@ -73,9 +73,9 @@ const Login = () => {
             </form>
             <p className="text-center text-sm text-gray-400 mt-4">
               Don’t have an account?{" "}
-              <a href="/signup" className="text-[#E2136E] underline">
+              <Link to="/signup" className="text-[#E2136E] underline">
                 Sign Up
-              </a>
+              </Link>
             </p>
           </CardContent>
         </Card>

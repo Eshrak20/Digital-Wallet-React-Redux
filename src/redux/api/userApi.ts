@@ -1,8 +1,9 @@
+import type { ProfileResponse } from "@/types/user.type";
 import { baseApi } from "./baseApi";
 
 export const userApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    myProfile: builder.query<{ data: unknown }, void>({
+    myProfile: builder.query<ProfileResponse, void>({
       query: () => ({
         url: "/user/my-profile",
         method: "GET",

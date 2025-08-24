@@ -1,4 +1,6 @@
 import App from "@/App";
+import { role } from "@/constants/role";
+import DashboardLayout from "@/layout/DashboardLayout";
 import Login from "@/Pages/Auth/Login";
 import Signup from "@/Pages/Auth/Signup";
 import About from "@/Pages/Website/About/About";
@@ -7,7 +9,11 @@ import Faq from "@/Pages/Website/Faq/Faq";
 import Feature from "@/Pages/Website/Feature/Feature";
 import Home from "@/Pages/Website/Home/Home.tsx";
 import Pricing from "@/Pages/Website/Pricing/Pricing";
-import { createBrowserRouter } from "react-router";
+import type { TRole } from "@/types/auth.type";
+import { withAuth } from "@/utils/withAuth";
+import { createBrowserRouter, Navigate } from "react-router";
+import { adminSidebarItems } from "./adminSidebarItems";
+import { generateRoutes } from "@/utils/generateRoutes";
 
 export const router = createBrowserRouter([
   {
@@ -46,6 +52,14 @@ export const router = createBrowserRouter([
         Component: Signup,
         path: "signup",
       },
+    ],
+  },
+  {
+    Component: withAuth(DashboardLayout, role.admin as TRole),
+    path: "/admin",
+    children: [
+      { index: true, element: <Navigate to="/admin/all-users" /> },
+      ...generateRoutes(adminSidebarItems),
     ],
   },
 ]);
