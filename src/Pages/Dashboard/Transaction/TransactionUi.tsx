@@ -6,7 +6,7 @@ import {
   Clock,
   CheckCircle2,
 } from "lucide-react";
-import type { TransactionUiProps } from "@/types/admin.type";
+import type { TransactionUiProps } from "@/types.type";
 
 const statusColors: Record<string, string> = {
   COMPLETED: "bg-green-100 text-green-700 border-green-300",

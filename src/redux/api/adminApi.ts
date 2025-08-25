@@ -1,5 +1,10 @@
 import { baseApi } from "./baseApi";
-import type { TransactionApiResponse, UsersResponse } from "@/types/admin.type";
+import type {
+  AllWalletApiResponse,
+  CommissionResponse,
+  TransactionApiResponse,
+  UsersResponse,
+} from "@/types.type";
 
 export const adminApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -24,7 +29,27 @@ export const adminApi = baseApi.injectEndpoints({
       }),
       providesTags: ["Admin"],
     }),
+    getAllCommission: builder.query<CommissionResponse, void>({
+      query: () => ({
+        url: "/com/all-agent-com",
+        method: "GET",
+      }),
+      providesTags: ["Admin"],
+    }),
+    getAllWallet: builder.query<AllWalletApiResponse, void>({
+      query: () => ({
+        url: "/wallet/all-wallet",
+        method: "GET",
+      }),
+      providesTags: ["Admin"],
+    }),
   }),
 });
 
-export const { useGetAllUserQuery, useGetAllAgentQuery,useGetAllTransQuery } = adminApi;
+export const {
+  useGetAllUserQuery,
+  useGetAllAgentQuery,
+  useGetAllTransQuery,
+  useGetAllCommissionQuery,
+  useGetAllWalletQuery,
+} = adminApi;

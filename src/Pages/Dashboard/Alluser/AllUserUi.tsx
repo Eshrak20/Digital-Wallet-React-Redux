@@ -1,5 +1,5 @@
 import SkeletonCard from "@/Pages/MYComponent/SkeletonCard";
-import type { User } from "@/types/admin.type";
+import type { User } from "@/types.type";
 import {
   Mail,
   Phone,

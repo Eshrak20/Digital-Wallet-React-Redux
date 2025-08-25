@@ -1,41 +1,18 @@
-// import AddDivision from "@/pages/Admin/AddDivision";
-// import AddTour from "@/pages/Admin/AddTour";
-// import AddTourType from "@/pages/Admin/AddTourType";
-// // import Analytics from "@/pages/Admin/Analytics";
-// import { ISidebarItem } from "@/types";
-// import { lazy } from "react";
+import type { ISidebarItem } from "@/types/sidebar.type";
+import { lazy } from "react";
+const AllCommission = lazy(
+  () => import("@/Pages/Dashboard/Commission/AllCommission")
+);
 
-// const Analytics = lazy(() => import("@/pages/Admin/Analytics"));
-
-// export const agentSidebarItems: ISidebarItem[] = [
-//   {
-//     title: "Dashboard",
-//     items: [
-//       {
-//         title: "Analytics",
-//         url: "/admin/analytics",
-//         component: Analytics,
-//       },
-//     ],
-//   },
-//   {
-//     title: "Tour Management",
-//     items: [
-//       {
-//         title: "Add Tour Type",
-//         url: "/admin/add-tour-type",
-//         component: AddTourType,
-//       },
-//       {
-//         title: "Add Division",
-//         url: "/admin/add-division",
-//         component: AddDivision,
-//       },
-//       {
-//         title: "Add Tour",
-//         url: "/admin/add-tour",
-//         component: AddTour,
-//       },
-//     ],
-//   },
-// ];
+export const agentSidebarItems: ISidebarItem[] = [
+  {
+    title: "Commission",
+    items: [
+      {
+        title: "All Commission",
+        url: "/agent/dashboard/agent-com",
+        component: AllCommission,
+      },
+    ],
+  },
+];

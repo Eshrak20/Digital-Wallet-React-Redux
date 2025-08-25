@@ -1,7 +1,9 @@
-import AllTrans from "@/Pages/Dashboard/Admin/Transaction/AllTrans";
+import AllWallet from "@/Pages/Dashboard/AllWallet/AllWallet";
+import AllCommission from "@/Pages/Dashboard/Commission/AllCommission";
+import AllTrans from "@/Pages/Dashboard/Transaction/AllTrans";
 import type { ISidebarItem } from "@/types/sidebar.type";
 import { lazy } from "react";
-const AllUsers = lazy(() => import("@/Pages/Dashboard/Admin/Alluser/AllUsers"));
+const AllUsers = lazy(() => import("@/Pages/Dashboard/Alluser/AllUsers"));
 
 export const adminSidebarItems: ISidebarItem[] = [
   {
@@ -9,12 +11,12 @@ export const adminSidebarItems: ISidebarItem[] = [
     items: [
       {
         title: "All Users",
-        url: "/admin/dashboard/all-users",
+        url: "/dashboard/all-users",
         component: AllUsers,
       },
-       {
+      {
         title: "All Agents",
-        url: "/admin/dashboard/all-agents",
+        url: "/dashboard/all-agents",
         component: AllUsers,
       },
     ],
@@ -24,10 +26,29 @@ export const adminSidebarItems: ISidebarItem[] = [
     items: [
       {
         title: "All Transaction",
-        url: "/admin/dashboard/all-trans",
+        url: "/dashboard/all-trans",
         component: AllTrans,
       },
-    
+    ],
+  },
+  {
+    title: "Commission",
+    items: [
+      {
+        title: "All Commission",
+        url: "/dashboard/all-agent-com",
+        component: AllCommission,
+      },
+    ],
+  },
+  {
+    title: "Wallet",
+    items: [
+      {
+        title: "All Wallet",
+        url: "/dashboard/all-wallet",
+        component: AllWallet,
+      },
     ],
   },
   // {
@@ -35,17 +56,17 @@ export const adminSidebarItems: ISidebarItem[] = [
   //   items: [
   //     {
   //       title: "Block User",
-  //       url: "/admin/block-user",
+  //       url: "/block-user",
   //       component: AddTourType,
   //     },
   //     {
   //       title: "Update User Role",
-  //       url: "/admin/update-user-role",
+  //       url: "/update-user-role",
   //       component: AddDivision,
   //     },
   //     {
   //       title: "Block User Wallet",
-  //       url: "/admin/block-user-wallet",
+  //       url: "/block-user-wallet",
   //       component: AddTour,
   //     },
   //   ],

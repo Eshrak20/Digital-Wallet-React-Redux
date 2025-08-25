@@ -1,4 +1,4 @@
-import { useGetAllAgentQuery, useGetAllUserQuery } from "@/redux/api/adminApi";
+import { useGetAllAgentQuery, useGetAllUserQuery } from "@/redux/apiApi";
 import AllUserUi from "./AllUserUi";
 import { useLocation } from "react-router-dom";
 import { User as UserIcon } from "lucide-react";

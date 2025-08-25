@@ -1,6 +1,6 @@
 import type { ProfileResponse } from "@/types/user.type";
 import { baseApi } from "./baseApi";
-import type { TransactionApiResponse } from "@/types/admin.type";
+import type { AllWalletApiResponse, TransactionApiResponse } from "@/types.type";
 
 export const userApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -18,7 +18,14 @@ export const userApi = baseApi.injectEndpoints({
       }),
       providesTags: ["User"],
     }),
+    getYourWallet: builder.query<AllWalletApiResponse, void>({
+      query: () => ({
+        url: "/wallet/my-wallet",
+        method: "GET",
+      }),
+      providesTags: ["User"],
+    }),
   }),
 });
 
-export const { useMyProfileQuery,useGetYourTransQuery } = userApi;
+export const { useMyProfileQuery,useGetYourTransQuery,useGetYourWalletQuery } = userApi;

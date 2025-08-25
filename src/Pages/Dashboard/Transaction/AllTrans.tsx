@@ -1,9 +1,9 @@
-import { useGetAllTransQuery } from "@/redux/api/adminApi";
 import { useGetYourTransQuery } from "@/redux/api/userApi";
 import { useLocation } from "react-router-dom";
 import { User as UserIcon } from "lucide-react";
 import SkeletonCard from "@/Pages/MYComponent/SkeletonCard";
 import TransactionUi from "./TransactionUi";
+import { useGetAllTransQuery } from "@/redux/api/adminApi";
 import type { Transaction } from "@/types/admin.type";
 
 const AllTrans = () => {

@@ -58,4 +58,42 @@ export interface TransactionApiResponse {
   data: TransactionResponseData;
 }
 
+export interface Commission {
+  _id: string;
+  agent_id: string;
+  amount: number;
+  createdAt: string; // ISO date string
+  updatedAt: string; // ISO date string
+}
+
+export interface CommissionResponse {
+  statusCode: number;
+  success: boolean;
+  message: string;
+  data: {
+    data: Commission[];
+  };
+}
+
+export interface WalletUiProps {
+  data: Wallet[];
+}
+export interface Wallet {
+  _id: string;
+  user: string;
+  balance: number;
+  status: "ACTIVE" | "INACTIVE" | string; // extendable if more statuses exist
+  createdAt: string; // ISO date string
+  updatedAt: string; // ISO date string
+}
+
+export interface AllWalletApiResponse {
+  statusCode: number;
+  success: boolean;
+  message: string;
+  data: {
+    data: Wallet[];
+  };
+}
+
 
