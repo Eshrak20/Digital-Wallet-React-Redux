@@ -97,3 +97,20 @@ export interface AllWalletApiResponse {
 }
 
 
+export interface WalletData {
+  _id: string;
+  user: string;
+  balance: number;
+  status: "ACTIVE" | "BLOCKED"; 
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface WalletApiResponse {
+  statusCode: number;
+  success: boolean;
+  message: string;
+  data: WalletData;
+}
+
+

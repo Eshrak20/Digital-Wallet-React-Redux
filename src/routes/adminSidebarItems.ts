@@ -1,9 +1,11 @@
-import AllWallet from "@/Pages/Dashboard/AllWallet/AllWallet";
+import AllWallet from "@/Pages/Dashboard/Wallet/AllWallet";
 import AllCommission from "@/Pages/Dashboard/Commission/AllCommission";
 import AllTrans from "@/Pages/Dashboard/Transaction/AllTrans";
 import type { ISidebarItem } from "@/types/sidebar.type";
 import { lazy } from "react";
-const AllUsers = lazy(() => import("@/Pages/Dashboard/Alluser/AllUsers"));
+import BlockWallet from "@/Pages/Dashboard/Wallet/BlockWallet";
+import AddMoneyWallet from "@/Pages/Dashboard/Wallet/AddMoneyWallet";
+const AllUsers = lazy(() => import("@/Pages/Dashboard/User/AllUsers"));
 
 export const adminSidebarItems: ISidebarItem[] = [
   {
@@ -48,6 +50,16 @@ export const adminSidebarItems: ISidebarItem[] = [
         title: "All Wallet",
         url: "/dashboard/all-wallet",
         component: AllWallet,
+      },
+      {
+        title: "Add Money",
+        url: "/dashboard/add-money-wallet",
+        component: AddMoneyWallet,
+      },
+      {
+        title: "Block Wallet",
+        url: "/dashboard/block-wallet",
+        component: BlockWallet,
       },
     ],
   },

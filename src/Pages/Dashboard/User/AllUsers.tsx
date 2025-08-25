@@ -1,8 +1,8 @@
-import { useGetAllAgentQuery, useGetAllUserQuery } from "@/redux/apiApi";
 import AllUserUi from "./AllUserUi";
 import { useLocation } from "react-router-dom";
 import { User as UserIcon } from "lucide-react";
 import SkeletonCard from "@/Pages/MYComponent/SkeletonCard";
+import { useGetAllAgentQuery, useGetAllUserQuery } from "@/redux/api/adminApi";
 
 const AllUsers = () => {
   const location = useLocation();

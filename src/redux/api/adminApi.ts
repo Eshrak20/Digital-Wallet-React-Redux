@@ -1,10 +1,11 @@
-import { baseApi } from "./baseApi";
 import type {
   AllWalletApiResponse,
   CommissionResponse,
   TransactionApiResponse,
   UsersResponse,
-} from "@/types.type";
+  WalletApiResponse,
+} from "@/types/admin.type";
+import { baseApi } from "./baseApi";
 
 export const adminApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -43,6 +44,16 @@ export const adminApi = baseApi.injectEndpoints({
       }),
       providesTags: ["Admin"],
     }),
+   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+   createBlockWallet: builder.mutation<WalletApiResponse, { id: string; body: any }>({
+    query: ({ id, body }) => ({
+      url: `/wallet/${id}`,
+      method: "PATCH",
+      body,
+  }),
+  invalidatesTags: ["Admin"],
+}),
+
   }),
 });
 
@@ -52,4 +63,5 @@ export const {
   useGetAllTransQuery,
   useGetAllCommissionQuery,
   useGetAllWalletQuery,
+  useCreateBlockWalletMutation
 } = adminApi;

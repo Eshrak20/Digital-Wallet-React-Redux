@@ -1,4 +1,4 @@
-import AllWallet from "@/Pages/Dashboard/AllWallet/AllWallet";
+import AllWallet from "@/Pages/Dashboard/Wallet/AllWallet";
 import WithdrawAdd from "@/Pages/Dashboard/PaymentCashout/WithdrawAdd";
 import type { ISidebarItem } from "@/types/sidebar.type";
 import { lazy } from "react";
