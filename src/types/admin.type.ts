@@ -112,5 +112,11 @@ export interface WalletApiResponse {
   message: string;
   data: WalletData;
 }
+export interface UpdateUserRoleApiResponse {
+  statusCode: number;
+  success: boolean;
+  message: string;
+  data: User;
+}
 
 

@@ -1,5 +1,5 @@
 import SkeletonCard from "@/Pages/MYComponent/SkeletonCard";
-import type { User } from "@/types.type";
+import type { User } from "@/types/admin.type";
 import {
   Mail,
   Phone,
@@ -34,9 +34,14 @@ function AllUserUi<T extends User>({ data }: AllUserUiProps<T>) {
           className="border border-gray-200 p-4 rounded-lg shadow-sm bg-white transition-all hover:shadow-lg hover:bg-gradient-to-r hover:from-pink-50 hover:to-white"
         >
           <div className="flex items-center justify-between mb-3">
-            <h3 className="font-bold text-lg text-black truncate">
-              {item.name}
+           <div>
+             <h3 className="font-bold text-lg text-black truncate">
+              {item.name} 
             </h3>
+            <h6 className="font-bold text-lg text-black truncate">
+              {item._id}
+            </h6>
+           </div>
             <span
               className={`px-2 py-1 rounded-full text-xs font-medium ${
                 item.role === "admin"

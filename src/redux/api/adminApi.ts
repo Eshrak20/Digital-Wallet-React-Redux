@@ -2,6 +2,7 @@ import type {
   AllWalletApiResponse,
   CommissionResponse,
   TransactionApiResponse,
+  UpdateUserRoleApiResponse,
   UsersResponse,
   WalletApiResponse,
 } from "@/types/admin.type";
@@ -54,6 +55,16 @@ export const adminApi = baseApi.injectEndpoints({
   invalidatesTags: ["Admin"],
 }),
 
+   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+   updateUserRole: builder.mutation<UpdateUserRoleApiResponse, { id: string; body: any }>({
+    query: ({ id, body }) => ({
+      url: `/user/${id}`,
+      method: "PATCH",
+      body,
+  }),
+  invalidatesTags: ["Admin"],
+}),
+
   }),
 });
 
@@ -63,5 +74,6 @@ export const {
   useGetAllTransQuery,
   useGetAllCommissionQuery,
   useGetAllWalletQuery,
-  useCreateBlockWalletMutation
+  useCreateBlockWalletMutation,
+  useUpdateUserRoleMutation
 } = adminApi;

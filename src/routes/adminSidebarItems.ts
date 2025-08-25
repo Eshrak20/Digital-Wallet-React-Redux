@@ -5,6 +5,7 @@ import type { ISidebarItem } from "@/types/sidebar.type";
 import { lazy } from "react";
 import BlockWallet from "@/Pages/Dashboard/Wallet/BlockWallet";
 import AddMoneyWallet from "@/Pages/Dashboard/Wallet/AddMoneyWallet";
+import UpdateUserRole from "@/Pages/Dashboard/User/UpdateUserRole";
 const AllUsers = lazy(() => import("@/Pages/Dashboard/User/AllUsers"));
 
 export const adminSidebarItems: ISidebarItem[] = [
@@ -20,6 +21,11 @@ export const adminSidebarItems: ISidebarItem[] = [
         title: "All Agents",
         url: "/dashboard/all-agents",
         component: AllUsers,
+      },
+      {
+        title: "Update User Role",
+        url: "/dashboard/update-user-role",
+        component: UpdateUserRole,
       },
     ],
   },
