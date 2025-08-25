@@ -14,17 +14,17 @@ export const adminSidebarItems: ISidebarItem[] = [
     items: [
       {
         title: "All Users",
-        url: "/dashboard/all-users",
+        url: "/admin/dashboard/all-users",
         component: AllUsers,
       },
       {
         title: "All Agents",
-        url: "/dashboard/all-agents",
+        url: "/admin/dashboard/all-agents",
         component: AllUsers,
       },
       {
         title: "Update User Role",
-        url: "/dashboard/update-user-role",
+        url: "/admin/dashboard/update-user-role",
         component: UpdateUserRole,
       },
     ],
@@ -34,7 +34,7 @@ export const adminSidebarItems: ISidebarItem[] = [
     items: [
       {
         title: "All Transaction",
-        url: "/dashboard/all-trans",
+        url: "/admin/dashboard/all-trans",
         component: AllTrans,
       },
     ],
@@ -44,7 +44,7 @@ export const adminSidebarItems: ISidebarItem[] = [
     items: [
       {
         title: "All Commission",
-        url: "/dashboard/all-agent-com",
+        url: "/admin/dashboard/all-agent-com",
         component: AllCommission,
       },
     ],
@@ -54,39 +54,19 @@ export const adminSidebarItems: ISidebarItem[] = [
     items: [
       {
         title: "All Wallet",
-        url: "/dashboard/all-wallet",
+        url: "/admin/dashboard/all-wallet",
         component: AllWallet,
       },
       {
         title: "Add Money",
-        url: "/dashboard/add-money-wallet",
+        url: "/admin/dashboard/add-money-wallet",
         component: AddMoneyWallet,
       },
       {
         title: "Block Wallet",
-        url: "/dashboard/block-wallet",
+        url: "/admin/dashboard/block-wallet",
         component: BlockWallet,
       },
     ],
   },
-  // {
-  //   title: "User Management",
-  //   items: [
-  //     {
-  //       title: "Block User",
-  //       url: "/block-user",
-  //       component: AddTourType,
-  //     },
-  //     {
-  //       title: "Update User Role",
-  //       url: "/update-user-role",
-  //       component: AddDivision,
-  //     },
-  //     {
-  //       title: "Block User Wallet",
-  //       url: "/block-user-wallet",
-  //       component: AddTour,
-  //     },
-  //   ],
-  // },
 ];

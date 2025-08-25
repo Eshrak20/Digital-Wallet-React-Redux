@@ -20,15 +20,18 @@ const Login = () => {
     e.preventDefault();
     try {
       const result = await loginUser(form).unwrap();
-      console.log("Login API Response:", result);
+      console.log("Login API Response:", result?.data?.user?.is_active);
 
       if (result.token) {
         sessionStorage.setItem("authToken", result.token);
       }
-
-      toast.success("Logged in successfully!");
-      navigate("/");
-
+      if (result?.data?.user?.is_active === "BLOCKED" || result?.data?.user?.is_active === "SUSPEND") {
+        navigate("/login");
+        toast.error(`User is ${result?.data?.user?.is_active}`);
+      } else {
+        toast.success("Logged in successfully!");
+        navigate("/");
+      }
     } catch (err: any) {
       handleApiError(err);
     }

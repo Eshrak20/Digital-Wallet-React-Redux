@@ -16,6 +16,7 @@ import { generateRoutes } from "@/utils/generateRoutes";
 import { userSidebarItems } from "./userSidebarItems";
 import { agentSidebarItems } from "./agentSidebarItems";
 import { adminSidebarItems } from "./adminSidebarItems";
+import Unauthorized from "@/Pages/Dashboard/User/Unauthorized";
 
 export const router = createBrowserRouter([
   {
@@ -58,9 +59,9 @@ export const router = createBrowserRouter([
   },
   {
     Component: withAuth(DashboardLayout, role.admin as TRole),
-    path: "/dashboard",
+    path: "/admin/dashboard",
     children: [
-      { index: true, element: <Navigate to="/dashboard/all-users" /> },
+      { index: true, element: <Navigate to="/admin/dashboard/all-users" /> },
       ...generateRoutes(adminSidebarItems),
     ],
   },
@@ -79,5 +80,9 @@ export const router = createBrowserRouter([
       { index: true, element: <Navigate to="/user/dashboard/your-trans" /> },
       ...generateRoutes(userSidebarItems),
     ],
+  },
+  {
+    Component: Unauthorized,
+    path: "/unauthorized",
   },
 ]);

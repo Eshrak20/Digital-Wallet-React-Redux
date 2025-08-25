@@ -24,10 +24,11 @@ export const adminApi = baseApi.injectEndpoints({
       }),
       providesTags: ["Admin"],
     }),
-    getAllTrans: builder.query<TransactionApiResponse, void>({
-      query: () => ({
+    getAllTrans: builder.query<TransactionApiResponse, { page: number; limit: number }>({
+      query: ({ page, limit }) => ({
         url: "/trans/all-transactions",
         method: "GET",
+        params: { page, limit },
       }),
       providesTags: ["Admin"],
     }),

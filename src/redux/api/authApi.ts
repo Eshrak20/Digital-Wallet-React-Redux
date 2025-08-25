@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { ISignup, ILogin } from "@/types/auth.type";
 import { baseApi } from "./baseApi";
 
@@ -13,8 +14,8 @@ export const authApi = baseApi.injectEndpoints({
       invalidatesTags: ["Auth"],
     }),
 
-    // Login
-    loginUser: builder.mutation<{ message: string; token: string }, ILogin>({
+    loginUser: builder.mutation<{data: any; message: string; token: string }, ILogin>
+    ({
       query: (credentials) => ({
         url: "/auth/login",
         method: "POST",

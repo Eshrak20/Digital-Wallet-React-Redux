@@ -14,6 +14,7 @@ const Signup = () => {
   const [form, setForm] = useState({
     name: "",
     email: "",
+    role: "",
     password: "",
     address: "",
     phone: "",
@@ -21,6 +22,7 @@ const Signup = () => {
   type FormValues = {
     name: string;
     email: string;
+    role: string;
     password: string;
     address: string;
     phone: string;
@@ -30,7 +32,14 @@ const Signup = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const key = e.target.name as keyof FormValues;
-    setForm({ ...form, [key]: e.target.value });
+    let value = e.target.value;
+
+    // force uppercase only for role
+    if (key === "role") {
+      value = value.toUpperCase();
+    }
+
+    setForm({ ...form, [key]: value });
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -51,6 +60,7 @@ const Signup = () => {
   }[] = [
     { name: "name", placeholder: "Full Name", type: "text" },
     { name: "email", placeholder: "Email Address", type: "email" },
+    { name: "role", placeholder: "USER or AGENT", type: "text" },
     { name: "password", placeholder: "Password", type: "password" },
     { name: "address", placeholder: "Address", type: "text" },
     { name: "phone", placeholder: "Phone Number", type: "text" },

@@ -12,7 +12,7 @@ export interface User {
   password: string;
   auths: Auth[];
   is_active: "ACTIVE" | "INACTIVE"; // You can expand if more statuses exist
-  role: "USER" | "ADMIN" | string;  // Expand as per your roles
+  role: "USER" | "ADMIN" | string; // Expand as per your roles
   is_verified: boolean;
   createdAt: string; // ISO date string
   updatedAt: string; // ISO date string
@@ -30,12 +30,10 @@ export interface UsersResponse {
   data: User[];
 }
 
-
-
 export interface Transaction {
   _id: string;
   user: string; // user id reference
-  type: "TRANSFER" | "DEPOSIT" | "WITHDRAW" | string; 
+  type: "TRANSFER" | "DEPOSIT" | "WITHDRAW" | string;
   amount: number;
   transaction_fee: number;
   status: "PENDING" | "COMPLETED" | "FAILED" | string;
@@ -43,14 +41,22 @@ export interface Transaction {
   updatedAt: string; // ISO date string
 }
 
+interface Meta {
+  page: number;
+  limit: number;
+  total: number;
+  totalPage: number;
+}
+
 export interface TransactionResponseData {
-  length: number;
   data: Transaction[];
+  meta: Meta;
 }
 
 export interface TransactionUiProps {
   data: Transaction[];
 }
+
 export interface TransactionApiResponse {
   statusCode: number;
   success: boolean;
@@ -96,12 +102,11 @@ export interface AllWalletApiResponse {
   };
 }
 
-
 export interface WalletData {
   _id: string;
   user: string;
   balance: number;
-  status: "ACTIVE" | "BLOCKED"; 
+  status: "ACTIVE" | "BLOCKED";
   createdAt: string;
   updatedAt: string;
 }
@@ -118,5 +123,3 @@ export interface UpdateUserRoleApiResponse {
   message: string;
   data: User;
 }
-
-

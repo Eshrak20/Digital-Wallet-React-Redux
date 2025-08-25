@@ -12,10 +12,11 @@ export const userApi = baseApi.injectEndpoints({
       }),
       providesTags: ["User"],
     }),
-    getYourTrans: builder.query<TransactionApiResponse, void>({
-      query: () => ({
+    getYourTrans: builder.query<TransactionApiResponse, { page: number; limit: number }>({
+      query: ({ page, limit }) => ({
         url: "/trans/your-transactions",
         method: "GET",
+        params: { page, limit },
       }),
       providesTags: ["User"],
     }),

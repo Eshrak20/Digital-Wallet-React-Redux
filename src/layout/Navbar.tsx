@@ -53,7 +53,6 @@ const navigationLinks = [
 
 export default function Navbar() {
   const { data: profileData, isLoading } = useMyProfileQuery();
-  console.log(profileData);
   const [logout] = useLogoutUserMutation();
   const dispatch = useDispatch();
   const userData = profileData?.data?.data;

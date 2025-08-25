@@ -10,7 +10,7 @@ interface WithdrawAddUIProps {
 }
 
 const WithdrawAddUI = ({ action, onSubmit, isLoading }: WithdrawAddUIProps) => {
-  const [amount, setAmount] = useState(0);
+  const [amount, setAmount] = useState(100);
   const [targetId, setTargetId] = useState("");
 
   const handleClick = () => {
@@ -28,11 +28,19 @@ const WithdrawAddUI = ({ action, onSubmit, isLoading }: WithdrawAddUIProps) => {
         <CardTitle>{action} Money</CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
-        {(action === "Withdraw" || action === "Add" || action === "Transfer") && (
+        {(action === "Withdraw" ||
+          action === "Add" ||
+          action === "Transfer") && (
           <>
             <input
               type="text"
-              placeholder={action === "Transfer" ? "Receiver ID" : action === "Withdraw" ? "Agent ID" : "User ID"}
+              placeholder={
+                action === "Transfer"
+                  ? "Receiver ID"
+                  : action === "Withdraw"
+                  ? "Agent ID"
+                  : "User ID"
+              }
               value={targetId}
               onChange={(e) => setTargetId(e.target.value)}
               className="w-full border p-2 rounded"
@@ -42,8 +50,10 @@ const WithdrawAddUI = ({ action, onSubmit, isLoading }: WithdrawAddUIProps) => {
               placeholder="Amount"
               value={amount}
               onChange={(e) => setAmount(Number(e.target.value))}
+              min="0"
               className="w-full border p-2 rounded"
             />
+
             <Button onClick={handleClick} disabled={isLoading}>
               {isLoading ? "Processing..." : action}
             </Button>
