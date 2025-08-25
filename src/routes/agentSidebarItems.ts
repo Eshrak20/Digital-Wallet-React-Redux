@@ -1,3 +1,5 @@
+import AllWallet from "@/Pages/Dashboard/AllWallet/AllWallet";
+import WithdrawAdd from "@/Pages/Dashboard/PaymentCashout/WithdrawAdd";
 import type { ISidebarItem } from "@/types/sidebar.type";
 import { lazy } from "react";
 const AllCommission = lazy(
@@ -12,6 +14,21 @@ export const agentSidebarItems: ISidebarItem[] = [
         title: "All Commission",
         url: "/agent/dashboard/agent-com",
         component: AllCommission,
+      },
+    ],
+  },
+  {
+    title: "Wallet",
+    items: [
+      {
+        title: "Your Wallet",
+        url: "/agent/dashboard/my-wallet",
+        component: AllWallet,
+      },
+      {
+        title: "Add Money",
+        url: "/agent/dashboard/wallet/add",
+        component: WithdrawAdd,
       },
     ],
   },

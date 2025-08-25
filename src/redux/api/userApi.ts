@@ -1,6 +1,7 @@
 import type { ProfileResponse } from "@/types/user.type";
 import { baseApi } from "./baseApi";
-import type { AllWalletApiResponse, TransactionApiResponse } from "@/types.type";
+import type { TransferResponse, WithdrawResponse } from "@/types/withdraw.type";
+import type { AllWalletApiResponse, TransactionApiResponse } from "@/types/admin.type";
 
 export const userApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -25,7 +26,29 @@ export const userApi = baseApi.injectEndpoints({
       }),
       providesTags: ["User"],
     }),
+    createWithdraw: builder.mutation<WithdrawResponse, void>({
+      query: (body) => ({
+        url: "/wallet/withdraw",
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: ["User"],
+    }),
+    createTransfer: builder.mutation<TransferResponse, void>({
+      query: (body) => ({
+        url: "/wallet/transfer-money",
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: ["User"],
+    }),
   }),
 });
 
-export const { useMyProfileQuery,useGetYourTransQuery,useGetYourWalletQuery } = userApi;
+export const {
+  useMyProfileQuery,
+  useGetYourTransQuery,
+  useGetYourWalletQuery,
+  useCreateWithdrawMutation,
+  useCreateTransferMutation,
+} = userApi;

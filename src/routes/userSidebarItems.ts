@@ -1,4 +1,5 @@
 import AllWallet from "@/Pages/Dashboard/AllWallet/AllWallet";
+import WithdrawAdd from "@/Pages/Dashboard/PaymentCashout/WithdrawAdd";
 import type { ISidebarItem } from "@/types/sidebar.type";
 import { lazy } from "react";
 const AllTrans = lazy(() => import("@/Pages/Dashboard/Transaction/AllTrans"));
@@ -21,6 +22,16 @@ export const userSidebarItems: ISidebarItem[] = [
         title: "Your Wallet",
         url: "/user/dashboard/my-wallet",
         component: AllWallet,
+      },
+      {
+        title: "Withdraw Money",
+        url: "/user/dashboard/wallet/withdraw",
+        component: WithdrawAdd,
+      },
+      {
+        title: "Transfer Money",
+        url: "/user/dashboard/wallet/transfer",
+        component: WithdrawAdd,
       },
     ],
   },
