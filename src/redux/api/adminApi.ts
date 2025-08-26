@@ -11,13 +11,15 @@ import { baseApi } from "./baseApi";
 
 export const adminApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    getAllUser: builder.query<UsersResponse, void>({
+    // redux/api/userApi.ts
+    getAllUser: builder.query<UsersResponse, { searchTerm?: string } | void>({
       query: () => ({
         url: "/user/all-users",
         method: "GET",
       }),
       providesTags: ["Admin"],
     }),
+
     getAllAgent: builder.query<UsersResponse, void>({
       query: () => ({
         url: "/user/all-agents",

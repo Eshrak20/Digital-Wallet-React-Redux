@@ -1,7 +1,7 @@
 import type { ProfileResponse } from "@/types/user.type";
 import { baseApi } from "./baseApi";
 import type { TransferResponse, WithdrawResponse } from "@/types/withdraw.type";
-import type { AllWalletApiResponse, TransactionApiResponse } from "@/types/admin.type";
+import type { AllWalletApiResponse, TransactionApiResponse, UsersResponse } from "@/types/admin.type";
 
 export const userApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -20,16 +20,16 @@ export const userApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["User"],
     }),
-  getYourTrans: builder.query<TransactionApiResponse, { page: number; limit: number; type?: string; startDate?: string; endDate?: string }>(
-  {
-    query: ({ page, limit, type, startDate, endDate }) => ({
-      url: "/trans/your-transactions",
-      method: "GET",
-      params: { page, limit, type, startDate, endDate },
-    }),
-    providesTags: ["User"],
-  }
-),
+    getYourTrans: builder.query<TransactionApiResponse, { page: number; limit: number; type?: string; startDate?: string; endDate?: string }>(
+      {
+        query: ({ page, limit, type, startDate, endDate }) => ({
+          url: "/trans/your-transactions",
+          method: "GET",
+          params: { page, limit, type, startDate, endDate },
+        }),
+        providesTags: ["User"],
+      }
+    ),
 
     getYourWallet: builder.query<AllWalletApiResponse, void>({
       query: () => ({
@@ -54,6 +54,15 @@ export const userApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["User"],
     }),
+    getAllUser: builder.query<UsersResponse, { searchTerm?: string } | void>({
+      query: (params) => ({
+        url: "/user/all-users",
+        method: "GET",
+        body: params,
+      }),
+      providesTags: ["Admin"],
+    }),
+
   }),
 });
 
@@ -64,4 +73,5 @@ export const {
   useGetYourWalletQuery,
   useCreateWithdrawMutation,
   useCreateTransferMutation,
+  useLazyGetAllUserQuery
 } = userApi;

@@ -3,12 +3,19 @@ import WithdrawAdd from "@/Pages/Dashboard/PaymentCashout/WithdrawAdd";
 import type { ISidebarItem } from "@/types/sidebar.type";
 import { lazy } from "react";
 import MyProfile from "@/Pages/Dashboard/User/MyProfile";
+import Overview from "@/Pages/Dashboard/Overview/Overview";
 const AllTrans = lazy(() => import("@/Pages/Dashboard/Transaction/AllTrans"));
 
 export const userSidebarItems: ISidebarItem[] = [
   {
     title: "Dashboard",
     items: [
+      {
+        title: "Quick Actions",
+        url: "/user/dashboard/quick-actions",
+        component: Overview,
+        icon: "w",
+      },
       {
         title: "My Profile",
         url: "/user/dashboard/my-profile",
