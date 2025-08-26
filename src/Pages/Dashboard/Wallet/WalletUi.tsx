@@ -1,67 +1,95 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Wallet, Clock, User } from "lucide-react";
-import type { WalletUiProps } from "@/types.type";
+import React from 'react';
 
+// Define a type for the wallet data, assuming it has these properties
+// This is a placeholder since the original type was external
+interface WalletData {
+  _id: string;
+  balance: number;
+  user: string;
+  status: 'ACTIVE' | 'INACTIVE' | string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+// Define props for the component
+interface WalletUiProps {
+  data: WalletData[];
+}
+
+// Define the color scheme for different wallet statuses using standard Tailwind colors
+// since these are not part of the Shadcn theme variables
 const statusColors: Record<string, string> = {
-  ACTIVE: "bg-green-100 text-green-700 border-green-300",
-  INACTIVE: "bg-red-100 text-red-700 border-red-300",
+  ACTIVE: "bg-green-500 text-green-50 font-semibold border-green-500",
+  INACTIVE: "bg-red-500 text-red-50 font-semibold border-red-500",
 };
 
 function WalletUi({ data }: WalletUiProps) {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    // Main container using background and padding from the theme
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4 md:p-8 bg-background">
+      {/* Map through the wallet data to render each card */}
       {data.map((wallet) => (
         <Card
           key={wallet._id}
-          className="shadow-sm border hover:shadow-md transition-all hover:scale-[1.02]"
+          // The Card component's style now uses theme variables and a hover effect
+          className="bg-card border-2 border-border text-card-foreground rounded-xl shadow-lg transition-all duration-300 transform hover:scale-[1.03] hover:shadow-2xl hover:border-primary cursor-pointer"
         >
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-lg font-semibold text-gray-900 truncate">
+          {/* Card Header with Title and Status Badge */}
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4 border-b border-border">
+            {/* Card Title uses the primary color from the theme */}
+            <CardTitle className="text-xl font-extrabold text-primary truncate">
               Wallet
             </CardTitle>
+            {/* Badge styles are adjusted to use the updated status colors and theme variables */}
             <Badge
               variant="outline"
-              className={
-                statusColors[wallet.status] ||
-                "bg-gray-100 text-gray-700 border-gray-200"
-              }
+              className={`text-xs uppercase px-3 py-1 rounded-full shadow-inner border ${
+                statusColors[wallet.status] || "bg-muted text-muted-foreground border-border"
+              }`}
             >
               {wallet.status}
             </Badge>
           </CardHeader>
 
-          <CardContent>
-            <div className="space-y-2 text-sm text-gray-700">
+          {/* Card Content with Wallet Details */}
+          <CardContent className="pt-6">
+            <div className="space-y-4 text-base text-muted-foreground font-medium">
               {/* Balance */}
               <div className="flex items-center justify-between">
-                <span className="flex items-center gap-2">
-                  <Wallet className="h-4 w-4 text-teal-600" />
+                <span className="flex items-center gap-3">
+                  {/* Icon color uses the primary theme color */}
+                  <Wallet className="h-5 w-5 text-primary" />
                   Balance
                 </span>
-                <span className="font-semibold text-gray-900">
-                  ${wallet.balance}
+                <span className="text-xl font-bold text-foreground tracking-wide">
+                  {/* Dollar sign uses the primary theme color */}
+                  <span className="text-primary">$</span>
+                  {wallet.balance}
                 </span>
               </div>
 
               {/* User ID */}
               <div className="flex items-center justify-between">
-                <span className="flex items-center gap-2">
-                  <User className="h-4 w-4 text-blue-600" />
+                <span className="flex items-center gap-3">
+                  {/* Icon color uses the muted-foreground theme color */}
+                  <User className="h-5 w-5 text-muted-foreground" />
                   User ID
                 </span>
-                <span className="text-gray-800">
-                  {wallet.user}
-                </span>
+                <span className="text-muted-foreground text-sm">{wallet.user}</span>
               </div>
 
               {/* Created Date */}
               <div className="flex items-center justify-between">
-                <span className="flex items-center gap-2">
-                  <Clock className="h-4 w-4 text-gray-500" />
+                <span className="flex items-center gap-3">
+                  {/* Icon color uses the muted-foreground theme color */}
+                  <Clock className="h-5 w-5 text-muted-foreground" />
                   Created
                 </span>
-                <span className="text-gray-800">
+                <span className="text-muted-foreground text-sm">
                   {new Date(wallet.createdAt).toLocaleDateString("en-US", {
                     year: "numeric",
                     month: "short",
@@ -72,11 +100,12 @@ function WalletUi({ data }: WalletUiProps) {
 
               {/* Updated Date */}
               <div className="flex items-center justify-between">
-                <span className="flex items-center gap-2">
-                  <Clock className="h-4 w-4 text-gray-500" />
+                <span className="flex items-center gap-3">
+                  {/* Icon color uses the muted-foreground theme color */}
+                  <Clock className="h-5 w-5 text-muted-foreground" />
                   Updated
                 </span>
-                <span className="text-gray-800">
+                <span className="text-muted-foreground text-sm">
                   {new Date(wallet.updatedAt).toLocaleDateString("en-US", {
                     year: "numeric",
                     month: "short",

@@ -34,13 +34,14 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { useMyProfileQuery } from "@/redux/api/userApi";
+import { useGetMyProfileQuery } from "@/redux/api/userApi";
 import { authApi, useLogoutUserMutation } from "@/redux/api/authApi";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useDispatch } from "react-redux";
 import { handleApiError } from "@/utils/handleApiError";
 import { toast } from "react-toastify";
 import { getDashboardPath } from "@/utils/getDashboardPath";
+import { ModeToggle } from "./ModeToggler";
 
 const navigationLinks = [
   { href: "/", label: "Home", icon: HouseIcon },
@@ -52,7 +53,7 @@ const navigationLinks = [
 ];
 
 export default function Navbar() {
-  const { data: profileData, isLoading } = useMyProfileQuery();
+  const { data: profileData, isLoading } = useGetMyProfileQuery();
   const [logout] = useLogoutUserMutation();
   const dispatch = useDispatch();
   const userData = profileData?.data?.data;
@@ -131,67 +132,73 @@ export default function Navbar() {
                   Sign Up
                 </Button>
               </Link>
+              <ModeToggle />
             </>
           ) : (
-            <DropdownMenu>
-              <DropdownMenuTrigger className="outline-none">
-                <Avatar className="border border-gray-700 cursor-pointer hover:border-[#E2136E] transition-colors">
-                  <AvatarImage
-                    src={
-                      userData.profilePic || "https://via.placeholder.com/40"
-                    }
-                    alt={userData.name}
-                  />
-                  <AvatarFallback className="bg-gray-800">
-                    <UserIcon className="text-gray-400" size={18} />
-                  </AvatarFallback>
-                </Avatar>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent
-                align="end"
-                className="bg-neutral-900 text-white border-gray-700 w-56"
-              >
-                <DropdownMenuLabel className="flex flex-col p-4">
-                  <span className="font-semibold">{userData.name}</span>
-                  <span className="text-sm text-gray-400 font-normal">
-                    {userData.email}
-                  </span>
-                </DropdownMenuLabel>
-                <DropdownMenuSeparator className="bg-gray-700" />
-                {userData && (
+            <>
+              <DropdownMenu>
+                <DropdownMenuTrigger className="outline-none">
+                  <Avatar className="border border-gray-700 cursor-pointer hover:border-[#E2136E] transition-colors">
+                    <AvatarImage
+                      src={
+                        userData.profilePic || "https://via.placeholder.com/40"
+                      }
+                      alt={userData.name}
+                    />
+                    <AvatarFallback className="bg-gray-800">
+                      <UserIcon className="text-gray-400" size={18} />
+                    </AvatarFallback>
+                  </Avatar>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent
+                  align="end"
+                  className="bg-neutral-900 text-white border-gray-700 w-56"
+                >
+                  <DropdownMenuLabel className="flex flex-col p-4">
+                    <span className="font-semibold">{userData.name}</span>
+                    <span className="text-sm text-gray-400 font-normal">
+                      {userData.email}
+                    </span>
+                  </DropdownMenuLabel>
+                  <DropdownMenuSeparator className="bg-gray-700" />
+                  {userData && (
+                    <>
+                      <DropdownMenuItem
+                        asChild
+                        className="cursor-pointer focus:bg-gray-800 focus:text-white"
+                      >
+                        <Link
+                          to={getDashboardPath(userData.role)}
+                          className="flex items-center gap-2"
+                        >
+                          <AlignStartVertical size={16} />
+                          Dashboard
+                        </Link>
+                      </DropdownMenuItem>
+                    </>
+                  )}
+
                   <DropdownMenuItem
                     asChild
                     className="cursor-pointer focus:bg-gray-800 focus:text-white"
                   >
-                    <Link
-                      to={getDashboardPath(userData.role)}
-                      className="flex items-center gap-2"
-                    >
-                      <AlignStartVertical size={16} />
-                      Dashboard
+                    <Link to="/settings" className="flex items-center gap-2">
+                      <Wallet2Icon size={16} />
+                      Wallet
                     </Link>
                   </DropdownMenuItem>
-                )}
-
-                <DropdownMenuItem
-                  asChild
-                  className="cursor-pointer focus:bg-gray-800 focus:text-white"
-                >
-                  <Link to="/settings" className="flex items-center gap-2">
-                    <Wallet2Icon size={16} />
-                    Wallet
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuSeparator className="bg-gray-700" />
-                <DropdownMenuItem
-                  onClick={handleLogout}
-                  className="cursor-pointer text-red-400 focus:bg-gray-800 focus:text-red-300"
-                >
-                  <LogOutIcon size={16} className="mr-2" />
-                  Logout
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+                  <DropdownMenuSeparator className="bg-gray-700" />
+                  <DropdownMenuItem
+                    onClick={handleLogout}
+                    className="cursor-pointer text-red-400 focus:bg-gray-800 focus:text-red-300"
+                  >
+                    <LogOutIcon size={16} className="mr-2" />
+                    Logout
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+              <ModeToggle />
+            </>
           )}
         </div>
 
@@ -248,6 +255,7 @@ export default function Navbar() {
                         Sign Up
                       </Button>
                     </Link>
+                    <ModeToggle />
                   </div>
                 ) : (
                   <>
@@ -268,6 +276,8 @@ export default function Navbar() {
                       <UserIcon size={16} className="text-gray-400" />
                       Settings
                     </Link>
+                    <ModeToggle />
+
                     <button
                       onClick={handleLogout}
                       className="flex items-center gap-2 px-3 py-2 text-red-400 hover:text-red-300 transition-colors rounded-md hover:bg-gray-800/50 text-left"

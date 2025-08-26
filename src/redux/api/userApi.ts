@@ -5,21 +5,32 @@ import type { AllWalletApiResponse, TransactionApiResponse } from "@/types/admin
 
 export const userApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    myProfile: builder.query<ProfileResponse, void>({
+    GetMyProfile: builder.query<ProfileResponse, void>({
       query: () => ({
         url: "/user/my-profile",
         method: "GET",
       }),
       providesTags: ["User"],
     }),
-    getYourTrans: builder.query<TransactionApiResponse, { page: number; limit: number }>({
-      query: ({ page, limit }) => ({
-        url: "/trans/your-transactions",
-        method: "GET",
-        params: { page, limit },
+    UpdateMyProfile: builder.mutation<ProfileResponse, Record<string, string>>({
+      query: (payload) => ({
+        url: "/user/update-profile",
+        method: "PATCH",
+        body: payload,
       }),
-      providesTags: ["User"],
+      invalidatesTags: ["User"],
     }),
+  getYourTrans: builder.query<TransactionApiResponse, { page: number; limit: number; type?: string; startDate?: string; endDate?: string }>(
+  {
+    query: ({ page, limit, type, startDate, endDate }) => ({
+      url: "/trans/your-transactions",
+      method: "GET",
+      params: { page, limit, type, startDate, endDate },
+    }),
+    providesTags: ["User"],
+  }
+),
+
     getYourWallet: builder.query<AllWalletApiResponse, void>({
       query: () => ({
         url: "/wallet/my-wallet",
@@ -47,7 +58,8 @@ export const userApi = baseApi.injectEndpoints({
 });
 
 export const {
-  useMyProfileQuery,
+  useGetMyProfileQuery,
+  useUpdateMyProfileMutation,
   useGetYourTransQuery,
   useGetYourWalletQuery,
   useCreateWithdrawMutation,

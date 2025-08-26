@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type {
   AllWalletApiResponse,
   CommissionResponse,
@@ -24,14 +25,17 @@ export const adminApi = baseApi.injectEndpoints({
       }),
       providesTags: ["Admin"],
     }),
-    getAllTrans: builder.query<TransactionApiResponse, { page: number; limit: number }>({
-      query: ({ page, limit }) => ({
-        url: "/trans/all-transactions",
-        method: "GET",
-        params: { page, limit },
-      }),
-      providesTags: ["Admin"],
-    }),
+    getAllTrans: builder.query<TransactionApiResponse, { page: number; limit: number; type?: string; startDate?: string; endDate?: string }>(
+      {
+        query: ({ page, limit, type, startDate, endDate }) => ({
+          url: "/trans/all-transactions",
+          method: "GET",
+          params: { page, limit, type, startDate, endDate },
+        }),
+        providesTags: ["Admin"],
+      }
+    ),
+
     getAllCommission: builder.query<CommissionResponse, void>({
       query: () => ({
         url: "/com/all-agent-com",
@@ -46,25 +50,23 @@ export const adminApi = baseApi.injectEndpoints({
       }),
       providesTags: ["Admin"],
     }),
-   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-   createBlockWallet: builder.mutation<WalletApiResponse, { id: string; body: any }>({
-    query: ({ id, body }) => ({
-      url: `/wallet/${id}`,
-      method: "PATCH",
-      body,
-  }),
-  invalidatesTags: ["Admin"],
-}),
+    createBlockWallet: builder.mutation<WalletApiResponse, { id: string; body: any }>({
+      query: ({ id, body }) => ({
+        url: `/wallet/${id}`,
+        method: "PATCH",
+        body,
+      }),
+      invalidatesTags: ["Admin"],
+    }),
 
-   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-   updateUserRole: builder.mutation<UpdateUserRoleApiResponse, { id: string; body: any }>({
-    query: ({ id, body }) => ({
-      url: `/user/${id}`,
-      method: "PATCH",
-      body,
-  }),
-  invalidatesTags: ["Admin"],
-}),
+    updateUserRole: builder.mutation<UpdateUserRoleApiResponse, { id: string; body: any }>({
+      query: ({ id, body }) => ({
+        url: `/user/${id}`,
+        method: "PATCH",
+        body,
+      }),
+      invalidatesTags: ["Admin"],
+    }),
 
   }),
 });

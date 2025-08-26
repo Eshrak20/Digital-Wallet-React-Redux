@@ -1,7 +1,9 @@
 @import "tailwindcss";
 @import "tw-animate-css";
-
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 @custom-variant dark (&:is(.dark *));
+
+
 
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
@@ -41,7 +43,7 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
-:root {
+/* :root {
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.129 0.042 264.695);
@@ -108,7 +110,68 @@
   --sidebar-accent-foreground: oklch(0.984 0.003 247.858);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.551 0.027 264.364);
+} */
+
+
+
+
+:root {
+  --background: white;
+  --foreground: black;
+
+  --card: white;
+  --card-foreground: black;
+
+  --primary: #E60076;
+  --primary-foreground: white;
+
+  --secondary: #f5f5f5;
+  --secondary-foreground: black;
+
+  --muted: #f5f5f5;
+  --muted-foreground: #666;
+
+  --accent: #E60076;
+  --accent-foreground: white;
+
+  --destructive: #e53e3e; /* red */
+  --border: #e5e7eb;
+  --input: #e5e7eb;
+  --ring: #E60076;
 }
+
+.dark {
+  --background: #111;
+  --foreground: white;
+
+  --card: #1a1a1a;
+  --card-foreground: white;
+
+  --primary: #E60076;
+  --primary-foreground: black;
+
+  --secondary: #2a2a2a;
+  --secondary-foreground: white;
+
+  --muted: #2a2a2a;
+  --muted-foreground: #aaa;
+
+  --accent: #E60076;
+  --accent-foreground: black;
+
+  --destructive: #e53e3e;
+  --border: #333;
+  --input: #333;
+  --ring: #E60076;
+}
+
+
+
+
+
+
+
+
 
 @layer base {
   * {

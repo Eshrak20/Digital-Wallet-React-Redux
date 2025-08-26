@@ -23,32 +23,32 @@ function TransactionUi({ data }: TransactionUiProps) {
           className="shadow-sm border hover:shadow-md transition-all hover:scale-[1.02]"
         >
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-lg font-semibold text-gray-900 truncate">
+            <CardTitle className="text-lg font-semibold  dark:text-gray-100 text-gray-700 truncate">
               {tx.type === "TRANSFER" ? "Money Transfer" : tx.type}
             </CardTitle>
             <Badge
               variant="outline"
               className={
                 statusColors[tx.status] ||
-                "bg-gray-100 text-gray-700 border-gray-200"
+                "bg-gray-100  dark:text-gray-100 text-gray-700 border-gray-200"
               }
             >
               {tx.status}
             </Badge>
           </CardHeader>
           <CardContent>
-            <div className="space-y-2 text-sm text-gray-700">
+            <div className="space-y-2 text-sm  dark:text-gray-100 text-gray-700">
               <div className="flex items-center justify-between">
                 <span className="flex items-center gap-2">
-                  {tx.type === "TRANSFER" ? (
+                  {tx.type === "TRANSFER" || tx.type === "WITHDRAW" ? (
                     <ArrowUpCircle className="h-4 w-4 text-[#E2136E]" />
                   ) : (
                     <ArrowDownCircle className="h-4 w-4 text-teal-600" />
                   )}
                   Amount
                 </span>
-                <span className="font-semibold text-gray-900">
-                  ${tx.amount}
+                <span className="font-semibold dark:text-gray-100 text-gray-700">
+                  ৳{tx.amount}
                 </span>
               </div>
 
@@ -57,7 +57,7 @@ function TransactionUi({ data }: TransactionUiProps) {
                   <CheckCircle2 className="h-4 w-4 text-teal-500" />
                   Fee
                 </span>
-                <span className="text-gray-800">${tx.transaction_fee}</span>
+                <span className="dark:text-gray-100 text-gray-700">৳{tx.transaction_fee}</span>
               </div>
 
               <div className="flex items-center justify-between">
@@ -65,7 +65,7 @@ function TransactionUi({ data }: TransactionUiProps) {
                   <Clock className="h-4 w-4 text-gray-500" />
                   Date
                 </span>
-                <span className="text-gray-800">
+                <span className="dark:text-gray-100 text-gray-700">
                   {new Date(tx.createdAt).toLocaleDateString("en-US", {
                     year: "numeric",
                     month: "short",

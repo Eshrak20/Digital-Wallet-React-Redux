@@ -4,6 +4,14 @@ interface User {
   role: string;
   email: string;
   profilePic: string;
+
+  phone?: string;
+  address?: string;
+  password?: string;
+  is_verified?: boolean;
+  createdAt?: string | number | Date;
+  avatarUrl?: string;
+
   // add other user fields here
 }
 

@@ -7,21 +7,24 @@ import TransactionUi from "./TransactionUi";
 import type { Transaction } from "@/types/admin.type";
 import { User as UserIcon } from "lucide-react";
 import Pagination from "@/Pages/MYComponent/Pagination";
+import TransactionFilter from "@/Pages/MYComponent/TransactionFilter";
 
 const AllTrans = () => {
   const location = useLocation();
   const isAdmin = location.pathname.includes("all-trans");
-
+  const [filters, setFilters] = useState<{ type?: string; startDate?: string; endDate?: string }>({});
   const [page, setPage] = useState(1);
-  const limit = 9;
+  const limit = 12;
 
   const { data: adminData, isFetching: isAdminFetching } = useGetAllTransQuery({
     page,
     limit,
+    ...filters,
   });
   const { data: userData, isFetching: isUserFetching } = useGetYourTransQuery({
     page,
     limit,
+    ...filters,
   });
 
   const rawData = isAdmin ? adminData?.data?.data : userData?.data;
@@ -37,8 +40,8 @@ const AllTrans = () => {
       <h2 className="text-2xl font-semibold mb-6">
         {isAdmin ? "Admin all" : "Your all"} Transaction
       </h2>
-
-      <div className="flex flex-col min-h-9/12">
+      <TransactionFilter onFilter={setFilters} />
+      <div className="flex flex-col min-h-screen">
         <div className="flex-1">
           {/* Transactions grid */}
           {isFetching ? (
