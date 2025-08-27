@@ -117,9 +117,9 @@ const TransferMoneyUi: React.FC<Props> = ({
             ) : users.length ? (
               users.map((u) => (
                 <TableRow key={u._id}>
-                  <TableCell className="font-medium">{u.name}</TableCell>
-                  <TableCell>{u.email}</TableCell>
-                  <TableCell>{u.phone}</TableCell>
+                  <TableCell className="text-foreground">{u.name}</TableCell>
+                  <TableCell className="text-foreground">{u.email}</TableCell>
+                  <TableCell className="text-foreground">{u.phone}</TableCell>
                   <TableCell className="text-right">
                     <Button size="sm" onClick={() => openSendDialog(u)}>
                       Send

@@ -5,6 +5,7 @@ export const baseApi = createApi({
   baseQuery: fetchBaseQuery({
     // baseUrl: "http://localhost:5000/api/w1",
     baseUrl: "https://digital-wallet-express.vercel.app/api/w1",
+
     credentials: "include",
   }),
   tagTypes: ["Admin","User","Agent","Auth"],

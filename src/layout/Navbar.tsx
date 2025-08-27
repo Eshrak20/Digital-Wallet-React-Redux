@@ -324,7 +324,7 @@ export default function Navbar() {
                     asChild
                     className="cursor-pointer focus:bg-secondary focus:text-foreground"
                   >
-                    <Link to="/settings" className="flex items-center gap-2">
+                    <Link to="/wallet" className="flex items-center gap-2">
                       <Wallet2Icon size={16} />
                       Wallet
                     </Link>
@@ -429,7 +429,7 @@ export default function Navbar() {
                       Dashboard
                     </Link>
                     <Link
-                      to="/settings"
+                      to="/wallet"
                       className="flex items-center gap-2 px-3 py-2 text-foreground hover:text-primary transition-colors rounded-md hover:bg-secondary"
                     >
                       <Wallet2Icon size={16} className="text-muted-foreground" />

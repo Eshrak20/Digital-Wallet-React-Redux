@@ -8,7 +8,7 @@ const Home = () => {
   const [loading, setLoading] = useState(true);
 
   // Fake loading
-  setTimeout(() => setLoading(false), 2000);
+  setTimeout(() => setLoading(false), 1000);
   
   return (
     <>
