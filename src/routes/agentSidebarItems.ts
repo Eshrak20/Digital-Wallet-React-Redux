@@ -3,8 +3,9 @@ import WithdrawAdd from "@/Pages/Dashboard/PaymentCashout/WithdrawAdd";
 import type { ISidebarItem } from "@/types/sidebar.type";
 import { lazy } from "react";
 import MyProfile from "@/Pages/Dashboard/User/MyProfile";
-const AllCommission = lazy(
-  () => import("@/Pages/Dashboard/Commission/AllCommission")
+import AllCommission from "@/Pages/Dashboard/Commission/AllCommission";
+const Overview = lazy(
+  () => import("@/Pages/Dashboard/Overview/Overview")
 );
 
 export const agentSidebarItems: ISidebarItem[] = [
@@ -12,10 +13,16 @@ export const agentSidebarItems: ISidebarItem[] = [
     title: "Dashboard",
     items: [
       {
+        title: "Quick Actions",
+        url: "/agent/dashboard/quick-actions",
+        component: Overview,
+        icon: "FiBell",
+      },
+      {
         title: "My Profile",
         url: "/agent/dashboard/my-profile",
         component: MyProfile,
-        icon: "w",
+        icon: "FiUser",
       },
     ],
   },
@@ -26,7 +33,7 @@ export const agentSidebarItems: ISidebarItem[] = [
         title: "All Commission",
         url: "/agent/dashboard/agent-com",
         component: AllCommission,
-        icon: "w",
+        icon: "FiDollarSign",
       },
     ],
   },
@@ -37,14 +44,15 @@ export const agentSidebarItems: ISidebarItem[] = [
         title: "Your Wallet",
         url: "/agent/dashboard/my-wallet",
         component: AllWallet,
-        icon: "w",
+        icon: "FiCreditCard",
       },
       {
         title: "Add Money",
         url: "/agent/dashboard/wallet/add",
         component: WithdrawAdd,
-        icon: "w",
+        icon: "FiPlusCircle",
       },
     ],
   },
 ];
+

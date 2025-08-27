@@ -17,7 +17,7 @@ const AllUsers = () => {
 
   return (
     <>
-      <h2 className="text-2xl font-semibold mb-6">
+      <h2 style={{ color: "var(--card-foreground)" }} className="text-2xl ml-2 font-semibold mb-6">
         {isUser ? "All Users" : "All Agents"} Dashboard
       </h2>
 
@@ -33,7 +33,7 @@ const AllUsers = () => {
           <h3 className="mt-2 text-lg font-medium text-black">
             No {isUser ? "Users" : "Agents"} found
           </h3>
-          <p className="mt-1 text-gray-500">
+          <p style={{ color: "var(--ring)" }}>
             There are currently no {isUser ? "users" : "agents"} in the system.
           </p>
         </div>

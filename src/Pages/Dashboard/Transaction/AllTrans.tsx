@@ -6,13 +6,17 @@ import SkeletonCard from "@/Pages/MYComponent/SkeletonCard";
 import TransactionUi from "./TransactionUi";
 import type { Transaction } from "@/types/admin.type";
 import { User as UserIcon } from "lucide-react";
-import Pagination from "@/Pages/MYComponent/Pagination";
 import TransactionFilter from "@/Pages/MYComponent/TransactionFilter";
+import Pagination from "@/Pages/MYComponent/Pagination";
 
 const AllTrans = () => {
   const location = useLocation();
   const isAdmin = location.pathname.includes("all-trans");
-  const [filters, setFilters] = useState<{ type?: string; startDate?: string; endDate?: string }>({});
+  const [filters, setFilters] = useState<{
+    type?: string;
+    startDate?: string;
+    endDate?: string;
+  }>({});
   const [page, setPage] = useState(1);
   const limit = 12;
 
@@ -31,17 +35,17 @@ const AllTrans = () => {
   const data: Transaction[] = Array.isArray(rawData)
     ? rawData
     : rawData?.data ?? [];
-  const meta = isAdmin ? adminData?.data?.meta : userData?.data.meta;
-
+  const meta = isAdmin
+    ? adminData?.data?.meta ?? { page, limit, total: 0, totalPage: 1 }
+    : userData?.data.meta ?? { page, limit, total: 0, totalPage: 1 };
   const isFetching = isAdmin ? isAdminFetching : isUserFetching;
-
   return (
     <>
-      <h2 className="text-2xl font-semibold mb-6">
+      <h2 style={{ color: "var(--card-foreground)" }} className="text-2xl ml-7 font-semibold mb-6">
         {isAdmin ? "Admin all" : "Your all"} Transaction
       </h2>
       <TransactionFilter onFilter={setFilters} />
-      <div className="flex flex-col min-h-screen">
+      <div className="flex flex-col max-h-max">
         <div className="flex-1">
           {/* Transactions grid */}
           {isFetching ? (
@@ -52,11 +56,11 @@ const AllTrans = () => {
             </div>
           ) : !data || data.length === 0 ? (
             <div className="text-center py-12">
-              <UserIcon className="mx-auto h-12 w-12 text-gray-400" />
+              <UserIcon style={{ color: "var(--card-foreground)" }} className="mx-auto h-12 w-12" />
               <h3 className="mt-2 text-lg font-medium text-black">
                 No Transaction found
               </h3>
-              <p className="mt-1 text-gray-500">
+              <p style={{ color: "var(--card-foreground)" }} className="mt-1">
                 There are currently no transaction in your account.
               </p>
             </div>
@@ -65,12 +69,15 @@ const AllTrans = () => {
           )}
         </div>
 
-        <div className="mt-0">
+        <div className="mt-10">
           <Pagination
-            currentPage={page}
-            totalItems={meta?.total ?? 0}
-            perPage={limit}
-            onPageChange={setPage}
+            page={meta?.page}
+            totalPage={meta?.totalPage}
+            total={meta?.total}
+            canGoPrev={meta?.page > 1}
+            canGoNext={meta?.page < meta.totalPage}
+            onPrev={() => setPage(Math.max(1, page - 1))}
+            onNext={() => setPage(page + 1)}
           />
         </div>
       </div>

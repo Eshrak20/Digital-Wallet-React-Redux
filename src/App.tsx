@@ -4,7 +4,9 @@ import CommonLayout from "./layout/CommonLayout";
 function App() {
   return (
     <CommonLayout>
-      <Outlet />
+      <main>
+        <Outlet /> {/* Page content will render here */}
+      </main>
     </CommonLayout>
   );
 }

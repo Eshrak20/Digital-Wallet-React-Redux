@@ -23,7 +23,7 @@ const AllWallet = () => {
 
   return (
     <>
-      <h2 className="text-2xl font-semibold mb-6">
+      <h2 style={{ color: "var(--card-foreground)" }} className="text-2xl ml-7 font-semibold mb-6">
         {isAdmin ? "All" : "Your"} Wallet
       </h2>
 

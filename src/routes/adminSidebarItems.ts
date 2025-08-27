@@ -3,21 +3,29 @@ import AllCommission from "@/Pages/Dashboard/Commission/AllCommission";
 import AllTrans from "@/Pages/Dashboard/Transaction/AllTrans";
 import type { ISidebarItem } from "@/types/sidebar.type";
 import { lazy } from "react";
-import BlockWallet from "@/Pages/Dashboard/Wallet/BlockWallet";
-import AddMoneyWallet from "@/Pages/Dashboard/Wallet/AddMoneyWallet";
-import UpdateUserRole from "@/Pages/Dashboard/User/UpdateUserRole";
 import MyProfile from "@/Pages/Dashboard/User/MyProfile";
-const AllUsers = lazy(() => import("@/Pages/Dashboard/User/AllUsers"));
+import AllUsers from "@/Pages/Dashboard/User/AllUsers";
+import UpdateUserRoleStatus from "@/Pages/Dashboard/User/UpdateUserRoleStatus";
+import AddMoneyWalletWrapper from "@/Pages/Dashboard/Wallet/Wrapper/AddMoneyWalletWrapper";
+import BlockWalletWrapper from "@/Pages/Dashboard/Wallet/Wrapper/BlockWalletWrapper";
+
+const Overview = lazy(() => import("@/Pages/Dashboard/Overview/Overview"));
 
 export const adminSidebarItems: ISidebarItem[] = [
   {
     title: "Dashboard",
     items: [
       {
+        title: "Quick Actions",
+        url: "/admin/dashboard/quick-actions",
+        component: Overview,
+        icon: "FiBell",
+      },
+      {
         title: "My Profile",
         url: "/admin/dashboard/my-profile",
         component: MyProfile,
-        icon: "w",
+        icon: "FiUser",
       },
     ],
   },
@@ -28,20 +36,27 @@ export const adminSidebarItems: ISidebarItem[] = [
         title: "All Users",
         url: "/admin/dashboard/all-users",
         component: AllUsers,
-        icon: "w",
+        icon: "FiUsers",
       },
       {
         title: "All Agents",
         url: "/admin/dashboard/all-agents",
         component: AllUsers,
-        icon: "w",
+        icon: "FiUserCheck",
       },
       {
         title: "Update User Role",
         url: "/admin/dashboard/update-user-role",
-        component: UpdateUserRole,
-        icon: "w",
+        component: UpdateUserRoleStatus,
+        icon: "FiEdit",
       },
+      {
+        title: "Update User Status",
+        url: "/admin/dashboard/update-user-status",
+        component: UpdateUserRoleStatus,
+        icon: "FiEdit",
+      },
+
     ],
   },
   {
@@ -51,7 +66,7 @@ export const adminSidebarItems: ISidebarItem[] = [
         title: "All Transaction",
         url: "/admin/dashboard/all-trans",
         component: AllTrans,
-        icon: "w",
+        icon: "FiList",
       },
     ],
   },
@@ -62,7 +77,7 @@ export const adminSidebarItems: ISidebarItem[] = [
         title: "All Commission",
         url: "/admin/dashboard/all-agent-com",
         component: AllCommission,
-        icon: "w",
+        icon: "FiDollarSign",
       },
     ],
   },
@@ -73,19 +88,19 @@ export const adminSidebarItems: ISidebarItem[] = [
         title: "All Wallet",
         url: "/admin/dashboard/all-wallet",
         component: AllWallet,
-        icon: "w",
+        icon: "FiCreditCard",
       },
       {
         title: "Add Money",
         url: "/admin/dashboard/add-money-wallet",
-        component: AddMoneyWallet,
-        icon: "w",
+        component: AddMoneyWalletWrapper, 
+        icon: "FiPlusCircle",
       },
       {
         title: "Block Wallet",
         url: "/admin/dashboard/block-wallet",
-        component: BlockWallet,
-        icon: "w",
+        component: BlockWalletWrapper, 
+        icon: "FiLock",
       },
     ],
   },

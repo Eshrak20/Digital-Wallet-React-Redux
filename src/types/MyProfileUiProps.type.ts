@@ -15,6 +15,7 @@ export interface MyProfileUiProps {
     confirmPassword: boolean;
   };
   profileInfo: Array<{
+    icon?(icon: any, arg1: { className: string; }): import("react").ReactNode;
     label: string;
     value: string;
     colSpan: string;

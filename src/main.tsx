@@ -11,22 +11,22 @@ import { ThemeProvider } from "./Pages/providers/theme.provider";
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ReduxProvider store={store}>
-      <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
-        <ToastContainer
-          position="bottom-center" // bottom to center
-          autoClose={3000} // auto close in 3 seconds
-          hideProgressBar={false} // show progress bar
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="colored" // optional: colored theme
-          style={{ whiteSpace: "pre-line" }} // 👈 apply globally
-        />
-        <RouterProvider router={router} />
-      </ThemeProvider>
+        <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
+          <ToastContainer
+            position="bottom-center" // bottom to center
+            autoClose={3000} // auto close in 3 seconds
+            hideProgressBar={false} // show progress bar
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="colored" // optional: colored theme
+            style={{ whiteSpace: "pre-line" }} // 👈 apply globally
+          />
+          <RouterProvider router={router} />
+        </ThemeProvider>
     </ReduxProvider>
   </StrictMode>
 );

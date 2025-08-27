@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { HelpCircle } from "lucide-react";
+
 const Faq = () => {
   const faqs = [
     {
@@ -19,16 +20,17 @@ const Faq = () => {
       a: "Yes, we use high-level security measures to protect your digital wallet.",
     },
   ];
+  
   return (
     <>
-      <div className="bg-black text-white min-h-screen pt-24 px-6">
+      <div className="bg-background text-foreground min-h-screen pt-24 px-6">
         <section className="max-w-5xl mx-auto py-16">
           <motion.h1
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             className="text-4xl font-bold text-center mb-12"
-            style={{ color: "#E2136E" }}
+            style={{ color: "var(--primary)" }}
           >
             Frequently Asked Questions
           </motion.h1>
@@ -41,16 +43,16 @@ const Faq = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="bg-neutral-900 p-6 rounded-xl shadow hover:shadow-lg hover:bg-neutral-800 transition"
+                className="bg-card text-card-foreground p-6 rounded-xl shadow hover:shadow-lg hover:bg-secondary transition"
               >
                 <div className="flex items-center mb-2">
                   <HelpCircle
                     className="w-6 h-6 mr-2"
-                    style={{ color: "#E2136E" }}
+                    style={{ color: "var(--primary)" }}
                   />
                   <h3 className="text-lg font-semibold">{faq.q}</h3>
                 </div>
-                <p className="text-neutral-400">{faq.a}</p>
+                <p className="text-muted-foreground">{faq.a}</p>
               </motion.div>
             ))}
           </div>

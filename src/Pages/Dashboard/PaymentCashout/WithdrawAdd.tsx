@@ -3,7 +3,6 @@ import { useLocation } from "react-router-dom";
 import WithdrawAddUI from "./WithdrawAddUI";
 import {
   useCreateWithdrawMutation,
-  useCreateTransferMutation,
 } from "@/redux/api/userApi";
 import { useCreateAddMoneyMutation } from "@/redux/api/agent.api";
 import { handleApiError } from "@/utils/handleApiError";
@@ -13,15 +12,12 @@ const WithdrawAdd = () => {
   const location = useLocation();
 
   const isWithdraw = location.pathname.includes("wallet/withdraw");
-  const isAddMoney = location.pathname.includes("wallet/add");
-  const isTransfer = location.pathname.includes("wallet/transfer");
+  const isAddMoney = location.pathname.includes("wallet/add") || location.pathname.includes("add-money-wallet");
 
   const [createWithdraw, { isLoading: isWithdrawLoading }] =
     useCreateWithdrawMutation();
   const [createAddMoney, { isLoading: isAddMoneyLoading }] =
     useCreateAddMoneyMutation();
-  const [createTransfer, { isLoading: isTransferLoading }] =
-    useCreateTransferMutation();
 
   const title = isWithdraw ? "Withdraw" : isAddMoney ? "Add" : "Transfer";
 
@@ -31,9 +27,8 @@ const WithdrawAdd = () => {
       let response;
       if (isWithdraw) response = await createWithdraw(body).unwrap();
       if (isAddMoney) response = await createAddMoney(body).unwrap();
-      if (isTransfer) response = await createTransfer(body).unwrap();
 
-      handleTransactionToast(title as "Withdraw" | "Add" | "Transfer", {
+      handleTransactionToast(title as "Withdraw" | "Add", {
         data: response?.data,
         body,
       });
@@ -48,13 +43,7 @@ const WithdrawAdd = () => {
       <WithdrawAddUI
         action={title}
         onSubmit={handleSubmit}
-        isLoading={
-          isWithdraw
-            ? isWithdrawLoading
-            : isAddMoney
-            ? isAddMoneyLoading
-            : isTransferLoading
-        }
+        isLoading={isWithdraw ? isWithdrawLoading : isAddMoneyLoading}
       />
     </>
   );

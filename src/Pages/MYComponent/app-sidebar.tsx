@@ -24,6 +24,7 @@ import { authApi, useLogoutUserMutation } from "@/redux/api/authApi";
 import { toast } from "react-toastify";
 import { handleApiError } from "@/utils/handleApiError";
 import type { TRole } from "@/types/auth.type";
+import { getIcon } from "@/utils/getIcon";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { data: userData } = useGetMyProfileQuery(undefined);
@@ -66,8 +67,13 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarHeader className="items-center p-4 border-b border-gray-200 dark:border-gray-800">
         <div className="flex items-center justify-between w-full">
           <Link to="/" className="flex items-center space-x-2">
+            <img
+              src="/logo.png" // 👈 replace with your logo path (e.g. /images/logo.png)
+              alt="WalletApp Logo"
+              className="h-8 w-auto"
+            />
             <span className="text-xl font-bold text-gray-900 dark:text-white">
-              WalletApp
+              Digital Wallet
             </span>
           </Link>
         </div>
@@ -118,7 +124,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                     <SidebarMenuButton
                       size="default"
                       asChild
-                      className={`mx-2  my-1 rounded-md transition-all duration-200 ${
+                      className={`mx-2 my-1 rounded-md transition-all duration-200 ${
                         location.pathname === item.url
                           ? "bg-pink-600 text-white shadow-sm"
                           : "text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800"
@@ -129,7 +135,14 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                         className="flex items-center px-4 py-3"
                       >
                         <span className="mr-3 text-lg">
-                          {item.icon || <FiList />}
+                          {(() => {
+                            const IconComponent = getIcon(item.icon);
+                            return IconComponent ? (
+                              <IconComponent />
+                            ) : (
+                              <FiList />
+                            );
+                          })()}
                         </span>
                         <span>{item.title}</span>
                       </Link>

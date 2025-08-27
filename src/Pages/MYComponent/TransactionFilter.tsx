@@ -88,7 +88,7 @@ const TransactionFilter = ({ onFilter }: TransactionFilterProps) => {
         <div className="md:col-span-1">
           <button
             onClick={handleClear}
-            className="flex items-center justify-center gap-2 w-full px-4 py-3 rounded-lg bg-[var(--primary)] text-[var(--primary-foreground)] shadow-sm hover:bg-[var(--primary-dark)] transition-all duration-200"
+            className="flex items-center justify-center gap-2 w-full px-4 py-3 rounded-lg bg-[var(--primary)] shadow-sm hover:bg-[var(--secondary-foreground)] transition-all duration-200 text-white dark:text-black"
           >
             <XCircle className="w-5 h-5" />
             Clear

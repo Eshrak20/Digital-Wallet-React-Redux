@@ -3,14 +3,16 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import SkeletonCard from "@/Pages/MYComponent/SkeletonCard";
+
 const Home = () => {
   const [loading, setLoading] = useState(true);
 
   // Fake loading
   setTimeout(() => setLoading(false), 2000);
+  
   return (
     <>
-      <div className="bg-black text-white min-h-screen">
+      <div className="bg-background text-foreground min-h-screen">
         <Navbar />
 
         {/* Hero Section */}
@@ -20,23 +22,23 @@ const Home = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             className="text-4xl md:text-6xl font-bold"
-            style={{ color: "#E2136E" }}
+            style={{ color: "var(--primary)" }}
           >
             Digital Wallet Management
           </motion.h1>
-          <p className="mt-4 text-lg text-neutral-300 max-w-2xl mx-auto">
+          <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
             Manage your money with elegance, speed, and security.
           </p>
           <div className="mt-6 flex gap-4 justify-center">
             <Button
-              className="text-white"
-              style={{ backgroundColor: "#E2136E" }}
+              className="text-primary-foreground"
+              style={{ backgroundColor: "var(--primary)" }}
             >
               Get Started
             </Button>
             <Button
-              variant="outline"
-              className="border-white text-[#E2136E] hover:border-[#E2136E] hover:text-[#E2136E]"
+              variant="link"
+              className="border-border text-primary hover:border-primary hover:text-primary"
             >
               Learn More
             </Button>
@@ -62,15 +64,15 @@ const Home = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: i * 0.2 }}
-                    className="bg-neutral-900 p-6 rounded-xl shadow hover:shadow-lg hover:bg-neutral-800 transition"
+                    className="bg-card text-card-foreground p-6 rounded-xl shadow hover:shadow-lg hover:bg-secondary transition"
                   >
                     <h3
                       className="text-xl font-semibold"
-                      style={{ color: "#E2136E" }}
+                      style={{ color: "var(--primary)" }}
                     >
                       {feature}
                     </h3>
-                    <p className="mt-2 text-neutral-300">
+                    <p className="mt-2 text-muted-foreground">
                       Enjoy {feature.toLowerCase()} with Digital Wallet
                       Management.
                     </p>
@@ -81,19 +83,7 @@ const Home = () => {
           </div>
         </section>
 
-        {/* Contact Section */}
-        <section id="contact" className="py-16 bg-neutral-950">
-          <h2 className="text-3xl font-bold text-center mb-6">Get in Touch</h2>
-          <p className="text-center text-neutral-300">
-            We’d love to hear from you! 💬
-          </p>
-        </section>
-
-        {/* Footer */}
-        <footer className="bg-black py-6 text-center text-neutral-400">
-          © {new Date().getFullYear()} Digital Wallet Management. All rights
-          reserved.
-        </footer>
+       
       </div>
     </>
   );

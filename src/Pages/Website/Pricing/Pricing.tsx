@@ -1,15 +1,16 @@
 import { motion } from "framer-motion";
 import { DollarSign } from "lucide-react";
+
 const Pricing = () => {
   const tiers = [
     {
-      name: "Basic",
+      name: "Add Money",
       price: "Free",
       desc: "Access core features like saving and sending money.",
     },
     {
-      name: "Premium",
-      price: "৳199/month",
+      name: "Withdraw Money",
+      price: "৳20/1000",
       desc: "Lower cash-out fees and priority support.",
     },
     {
@@ -18,21 +19,22 @@ const Pricing = () => {
       desc: "Tailored solutions for businesses and agents.",
     },
   ];
+  
   return (
     <>
-      <div className="bg-black text-white min-h-screen pt-24 px-6">
+      <div className="bg-background text-foreground min-h-screen pt-24 px-6">
         <section className="max-w-6xl mx-auto py-16">
           <motion.h1
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             className="text-4xl font-bold text-center mb-12"
-            style={{ color: "#E2136E" }}
+            style={{ color: "var(--primary)" }}
           >
             Pricing & Service Fees
           </motion.h1>
 
-          <p className="text-center text-neutral-300 mb-8">
+          <p className="text-center text-muted-foreground mb-8">
             For every 1000 Taka or above cash-out, a service fee of 20 Taka
             applies. This fee is divided equally between the Agent and the
             Admin.
@@ -46,15 +48,15 @@ const Pricing = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.2 }}
-                className="bg-neutral-900 p-6 rounded-xl shadow hover:shadow-lg hover:bg-neutral-800 transition text-center"
+                className="bg-card text-card-foreground p-6 rounded-xl shadow hover:shadow-lg hover:bg-secondary transition text-center"
               >
                 <DollarSign
                   className="w-10 h-10 mx-auto mb-4"
-                  style={{ color: "#E2136E" }}
+                  style={{ color: "var(--primary)" }}
                 />
                 <h3 className="text-2xl font-semibold mb-2">{tier.name}</h3>
                 <p className="text-xl mb-2">{tier.price}</p>
-                <p className="text-neutral-400">{tier.desc}</p>
+                <p className="text-muted-foreground">{tier.desc}</p>
               </motion.div>
             ))}
           </div>

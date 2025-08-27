@@ -1,7 +1,7 @@
 import type { ProfileResponse } from "@/types/user.type";
 import { baseApi } from "./baseApi";
 import type { TransferResponse, WithdrawResponse } from "@/types/withdraw.type";
-import type { AllWalletApiResponse, TransactionApiResponse, UsersResponse } from "@/types/admin.type";
+import type { AllWalletApiResponse, GetAllUserParams, TransactionApiResponse, UsersResponse } from "@/types/admin.type";
 
 export const userApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -46,7 +46,7 @@ export const userApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["User"],
     }),
-    createTransfer: builder.mutation<TransferResponse, void>({
+    createTransfer: builder.mutation<TransferResponse, { receiver_id: string, amount: number }>({
       query: (body) => ({
         url: "/wallet/transfer-money",
         method: "POST",
@@ -54,13 +54,29 @@ export const userApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["User"],
     }),
-    getAllUser: builder.query<UsersResponse, { searchTerm?: string } | void>({
+    // getAllUser: builder.query<UsersResponse, { searchTerm?: string } | void>({
+    //   query: (params) => ({
+    //     url: "/user/all-users",
+    //     method: "GET",
+    //     body: params,
+    //   }),
+    //   providesTags: ["User"],
+    // }),
+
+    // /redux/api/userApi.ts
+    // getAllUser: builder.query<UsersResponse, { page?: number; limit?: number; searchTerm?: string; email?: string; phone?: string }>({
+    //   query: (params) => ({
+    //     url: '/api/w1/user/all-users',
+    //     method: 'GET',
+    //     params, // <-- this attaches ?page=&limit=&email=&phone=&searchTerm=
+    //   }),
+    // }),
+    getAllUser: builder.query<UsersResponse, GetAllUserParams>({
       query: (params) => ({
         url: "/user/all-users",
         method: "GET",
-        body: params,
+        params, // ✅ this works
       }),
-      providesTags: ["Admin"],
     }),
 
   }),

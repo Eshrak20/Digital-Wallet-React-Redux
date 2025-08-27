@@ -3,8 +3,9 @@ import WithdrawAdd from "@/Pages/Dashboard/PaymentCashout/WithdrawAdd";
 import type { ISidebarItem } from "@/types/sidebar.type";
 import { lazy } from "react";
 import MyProfile from "@/Pages/Dashboard/User/MyProfile";
-import Overview from "@/Pages/Dashboard/Overview/Overview";
-const AllTrans = lazy(() => import("@/Pages/Dashboard/Transaction/AllTrans"));
+import TransferMoney from "@/Pages/Dashboard/PaymentCashout/TransferMoney";
+import AllTrans from "@/Pages/Dashboard/Transaction/AllTrans";
+const Overview = lazy(() => import("@/Pages/Dashboard/Overview/Overview"));
 
 export const userSidebarItems: ISidebarItem[] = [
   {
@@ -14,13 +15,13 @@ export const userSidebarItems: ISidebarItem[] = [
         title: "Quick Actions",
         url: "/user/dashboard/quick-actions",
         component: Overview,
-        icon: "w",
+        icon: "FiBell",
       },
       {
         title: "My Profile",
         url: "/user/dashboard/my-profile",
         component: MyProfile,
-        icon: "w",
+        icon: "FiUser",
       },
     ],
   },
@@ -31,7 +32,7 @@ export const userSidebarItems: ISidebarItem[] = [
         title: "Your Transaction History",
         url: "/user/dashboard/your-trans",
         component: AllTrans,
-        icon: "w",
+        icon: "FiList",
       },
     ],
   },
@@ -42,20 +43,21 @@ export const userSidebarItems: ISidebarItem[] = [
         title: "Your Wallet",
         url: "/user/dashboard/my-wallet",
         component: AllWallet,
-        icon: "w",
+        icon: "FiDollarSign",
       },
       {
         title: "Withdraw Money",
         url: "/user/dashboard/wallet/withdraw",
         component: WithdrawAdd,
-        icon: "w",
+        icon: "FiArrowDown",
       },
       {
         title: "Transfer Money",
         url: "/user/dashboard/wallet/transfer",
-        component: WithdrawAdd,
-        icon: "w",
+        component: TransferMoney,
+        icon: "FiSend",
       },
     ],
   },
 ];
+

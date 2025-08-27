@@ -52,6 +52,13 @@ export const adminApi = baseApi.injectEndpoints({
       }),
       providesTags: ["Admin"],
     }),
+    getCapitalWallet: builder.query<AllWalletApiResponse, void>({
+      query: () => ({
+        url: "/wallet/capital-wallet",
+        method: "GET",
+      }),
+      providesTags: ["Admin"],
+    }),
     createBlockWallet: builder.mutation<WalletApiResponse, { id: string; body: any }>({
       query: ({ id, body }) => ({
         url: `/wallet/${id}`,
@@ -61,7 +68,7 @@ export const adminApi = baseApi.injectEndpoints({
       invalidatesTags: ["Admin"],
     }),
 
-    updateUserRole: builder.mutation<UpdateUserRoleApiResponse, { id: string; body: any }>({
+    updateUserRoleStatus: builder.mutation<UpdateUserRoleApiResponse, { id: string; body: any }>({
       query: ({ id, body }) => ({
         url: `/user/${id}`,
         method: "PATCH",
@@ -80,5 +87,6 @@ export const {
   useGetAllCommissionQuery,
   useGetAllWalletQuery,
   useCreateBlockWalletMutation,
-  useUpdateUserRoleMutation
+  useUpdateUserRoleStatusMutation,
+  useGetCapitalWalletQuery
 } = adminApi;

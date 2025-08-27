@@ -11,17 +11,26 @@ export interface User {
   address: string;
   password: string;
   auths: Auth[];
-  is_active: "ACTIVE" | "INACTIVE"; // You can expand if more statuses exist
-  role: "USER" | "ADMIN" | string; // Expand as per your roles
+  is_active: "ACTIVE" | "INACTIVE";
+  role: "USER" | "ADMIN" | string;
   is_verified: boolean;
-  createdAt: string; // ISO date string
-  updatedAt: string; // ISO date string
+  createdAt: string;
+  updatedAt: string;
 }
 
 interface Meta {
+  page: number;
+  limit: number;
   total: number;
+  totalPage: number;
 }
-
+export type GetAllUserParams = {
+  page?: number;
+  limit?: number;
+  searchTerm?: string;
+  email?: string;
+  phone?: string;
+};
 export interface UsersResponse {
   statusCode: number;
   success: boolean;
@@ -68,6 +77,7 @@ export interface Commission {
   _id: string;
   agent_id: string;
   amount: number;
+  type: "CASHOUT" | "REFERRAL";
   createdAt: string; // ISO date string
   updatedAt: string; // ISO date string
 }
